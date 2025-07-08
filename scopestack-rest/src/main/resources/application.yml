@@ -6,6 +6,12 @@ server:
   port: 8080
   servlet:
     context-path: /
+  ssl:
+    enabled: true
+    key-store: classpath:ssl/scopestack.p12
+    key-store-password: scopestack123
+    key-store-type: PKCS12
+    key-alias: scopestack
   
   # Jackson Configuration
   jackson:
