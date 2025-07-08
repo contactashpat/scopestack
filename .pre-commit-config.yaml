@@ -1,18 +1,18 @@
 repos:
   # YAML linting
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.32.0
+    rev: v1.37.1
     hooks:
       - id: yamllint
 
-  # Markdown formatting
-  - repo: https://github.com/DavidAnson/markdownlint
-    rev: v0.39.1
+  # Markdown formatting (community-maintained)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
     hooks:
       - id: markdownlint
 
   # JSON formatting
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
