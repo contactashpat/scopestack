@@ -28,7 +28,7 @@ public class SecurityConfig {
             
             // Configure authorization
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/**", "/swagger-ui/**", "/api-docs/**", "/h2-console/**").permitAll()
+                .requestMatchers("/api/**", "/swagger-ui/**", "/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             );
 

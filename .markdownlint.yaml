@@ -1,0 +1,4 @@
+---
+# Markdown linting configuration
+# Disable line length rule to allow longer lines
+MD013: false

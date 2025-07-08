@@ -1,6 +1,7 @@
 # ScopeStack - Spring Boot Multi-Module Project
 
-A Spring Boot application with a multi-module Maven structure for managing products with RESTful APIs.
+A Spring Boot application with a multi-module Maven structure for managing
+products with RESTful APIs.
 
 ## Features
 
@@ -9,7 +10,7 @@ A Spring Boot application with a multi-module Maven structure for managing produ
 - **Spring Boot 3.2.0** with Spring Data JPA
 - **HTTPS/SSL/TLS encryption** with self-signed certificate
 - **HTTP/2 protocol support** for improved performance
-- **H2 in-memory database** with sample data
+- **PostgreSQL database** with sample data
 - **Pagination support** for large datasets
 - **Docker support** with docker-compose
 - **OpenBao (Vault) integration** for secrets management
@@ -17,7 +18,7 @@ A Spring Boot application with a multi-module Maven structure for managing produ
 
 ## Project Structure
 
-```
+```text
 scopestack/
 ├── scopestack-common/          # Common models and DTOs
 │   ├── src/main/java/com/scopestack/common/
@@ -100,8 +101,8 @@ The project includes OpenBao (a HashiCorp Vault alternative) for secrets managem
 
 **OpenBao Access:**
 
-- **URL**: http://localhost:8200
-- **UI**: http://localhost:8200/ui
+- **URL**: <http://localhost:8200>
+- **UI**: <http://localhost:8200/ui>
 - **Root Token**: `scopestack-dev-token`
 
 **Available Commands:**
@@ -118,7 +119,7 @@ The project includes OpenBao (a HashiCorp Vault alternative) for secrets managem
 
 ### Base URL
 
-```
+```text
 https://localhost:8443/api/products
 ```
 
@@ -344,15 +345,17 @@ Key configuration in `scopestack-rest/src/main/resources/application.yml`:
 ```yaml
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
+    url: jdbc:postgresql://localhost:5432/scopestack
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   cloud:
     vault:
       host: localhost
@@ -413,8 +416,13 @@ The application is configured to use OpenBao for secrets management:
    ```
 
 3. **Database Connection Issues**
-   - Check H2 console at `https://localhost:8443/h2-console`
+   - Check PostgreSQL connection: `docker compose ps postgres`
    - Verify database configuration in `application.yml`
+   - Reset database:
+
+     ```bash
+     docker compose down && docker volume rm scopestack_postgres_data && docker compose up -d postgres
+     ```
 
 ### Logs
 
