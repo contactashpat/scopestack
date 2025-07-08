@@ -91,12 +91,12 @@ init_secrets() {
     export VAULT_TOKEN=scopestack-dev-token
     export VAULT_ADDR=http://localhost:8200
     
-    # Enable key-value secrets engine
+    # Enable key-value secrets engine (if not already enabled)
     print_status "Enabling key-value secrets engine..."
     curl -s -X POST \
         -H "X-Vault-Token: $VAULT_TOKEN" \
         -d '{"type": "kv", "options": {"version": "2"}}' \
-        http://localhost:8200/v1/sys/mounts/secret
+        http://localhost:8200/v1/sys/mounts/secret || true
     
     # Store some sample secrets
     print_status "Storing sample secrets..."
@@ -112,6 +112,12 @@ init_secrets() {
         -H "X-Vault-Token: $VAULT_TOKEN" \
         -d '{"data": {"jwt-secret": "scopestack-jwt-secret-key-2024", "api-key": "scopestack-api-key-2024"}}' \
         http://localhost:8200/v1/secret/data/application
+    
+    # Feature flags
+    curl -s -X POST \
+        -H "X-Vault-Token: $VAULT_TOKEN" \
+        -d '{"data": {"enable-cache": "true", "cache-ttl": "300", "max-connections": "50"}}' \
+        http://localhost:8200/v1/secret/data/features
     
     print_success "Secrets initialized successfully!"
     print_status "You can view secrets at: http://localhost:8200/ui/vault/secrets/secret"
