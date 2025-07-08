@@ -3,7 +3,7 @@ spring:
     name: scopestack-product-api
 
 server:
-  port: 8080
+  port: 8443
   servlet:
     context-path: /
   ssl:
