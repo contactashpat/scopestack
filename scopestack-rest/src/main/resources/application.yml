@@ -1,6 +1,27 @@
+---
 spring:
   application:
     name: scopestack-product-api
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      authentication: TOKEN
+      token: scopestack-dev-token
+      fail-fast: false
+      kv:
+        enabled: true
+        backend: secret
+        application-name: scopestack-rest
+        default-context: application
+        profile-separator: '/'
 
 server:
   port: 8443
@@ -12,14 +33,10 @@ server:
     key-store-password: scopestack123
     key-store-type: PKCS12
     key-alias: scopestack
-  
-  # Jackson Configuration
-  jackson:
-    default-property-inclusion: non_null
-    serialization:
-      write-dates-as-timestamps: false
-    deserialization:
-      fail-on-unknown-properties: false
+
+# HTTP server for redirects (optional, for development)
+server.http:
+  port: 8080
 
 # OpenAPI Configuration
 springdoc:
@@ -35,20 +52,8 @@ springdoc:
     version: 1.0.0
     contact:
       name: ScopeStack Team
-      email: api@scopestack.com
-  servers:
-    - url: https://localhost:8443
-      description: Local development server
-
-# Logging Configuration
-logging:
-  level:
-    com.scopestack: DEBUG
-    org.springframework.web: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+      email: support@scopestack.com
+      url: https://scopestack.com
 
 # Application-specific configuration
 app:
@@ -56,19 +61,3 @@ app:
     default-page-size: 20
     max-page-size: 100
     low-stock-threshold: 10
-
-# OpenBao (Vault) Configuration for Docker
-  cloud:
-    vault:
-      host: localhost
-      port: 8200
-      scheme: http
-      authentication: TOKEN
-      token: scopestack-dev-token
-      fail-fast: false
-      kv:
-        enabled: true
-        backend: secret
-        application-name: scopestack-rest
-        default-context: application
-        profile-separator: '/'
