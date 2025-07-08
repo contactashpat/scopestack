@@ -55,23 +55,23 @@ scopestack/
 ./mvnw spring-boot:run -pl scopestack-rest
 ```
 
-The application will start on `http://localhost:8080`
+The application will start on `https://localhost:8443`
 
 ### 3. Using Docker
 
 ```bash
 # Build and run with Docker Compose
-docker-compose up --build
+docker compose up --build
 
 # Or run individual services
-docker-compose up scopestack-rest
+docker compose up scopestack-rest
 ```
 
 ## API Documentation
 
 ### Base URL
 ```
-http://localhost:8080/api/products
+https://localhost:8443/api/products
 ```
 
 ### Endpoints
@@ -159,13 +159,13 @@ DELETE /api/products/{id}
 
 ```bash
 # Get all products
-curl -X GET "http://localhost:8080/api/products"
+curl -k -X GET "https://localhost:8443/api/products"
 
 # Get product by ID
-curl -X GET "http://localhost:8080/api/products/1"
+curl -k -X GET "https://localhost:8443/api/products/1"
 
 # Create a product
-curl -X POST "http://localhost:8080/api/products" \
+curl -k -X POST "https://localhost:8443/api/products" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Product",
@@ -175,7 +175,7 @@ curl -X POST "http://localhost:8080/api/products" \
   }'
 
 # Update a product
-curl -X PUT "http://localhost:8080/api/products/1" \
+curl -k -X PUT "https://localhost:8443/api/products/1" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Updated Product",
@@ -185,7 +185,7 @@ curl -X PUT "http://localhost:8080/api/products/1" \
   }'
 
 # Delete a product
-curl -X DELETE "http://localhost:8080/api/products/1"
+curl -k -X DELETE "https://localhost:8443/api/products/1"
 ```
 
 ### Using Postman
@@ -202,21 +202,21 @@ curl -X DELETE "http://localhost:8080/api/products/1"
       "name": "Get All Products",
       "request": {
         "method": "GET",
-        "url": "http://localhost:8080/api/products"
+        "url": "https://localhost:8443/api/products"
       }
     },
     {
       "name": "Get Product by ID",
       "request": {
         "method": "GET",
-        "url": "http://localhost:8080/api/products/1"
+        "url": "https://localhost:8443/api/products/1"
       }
     },
     {
       "name": "Create Product",
       "request": {
         "method": "POST",
-        "url": "http://localhost:8080/api/products",
+        "url": "https://localhost:8443/api/products",
         "header": [
           {
             "key": "Content-Type",
@@ -314,7 +314,7 @@ spring:
    ```
 
 3. **Database Connection Issues**
-   - Check H2 console at `http://localhost:8080/h2-console`
+   - Check H2 console at `https://localhost:8443/h2-console`
    - Verify database configuration in `application.yml`
 
 ### Logs
