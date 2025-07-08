@@ -99,11 +99,13 @@ The project includes OpenBao (a HashiCorp Vault alternative) for secrets managem
 ```
 
 **OpenBao Access:**
+
 - **URL**: http://localhost:8200
 - **UI**: http://localhost:8200/ui
 - **Root Token**: `scopestack-dev-token`
 
 **Available Commands:**
+
 - `./setup-openbao.sh start` - Start OpenBao container
 - `./setup-openbao.sh stop` - Stop OpenBao container
 - `./setup-openbao.sh restart` - Restart OpenBao container
@@ -115,6 +117,7 @@ The project includes OpenBao (a HashiCorp Vault alternative) for secrets managem
 ## API Documentation
 
 ### Base URL
+
 ```
 https://localhost:8443/api/products
 ```
@@ -122,11 +125,13 @@ https://localhost:8443/api/products
 ### Endpoints
 
 #### Get All Products (Paginated)
+
 ```http
 GET /api/products?page=0&size=20
 ```
 
 **Response:**
+
 ```json
 {
   "content": [
@@ -150,11 +155,13 @@ GET /api/products?page=0&size=20
 ```
 
 #### Get Product by ID
+
 ```http
 GET /api/products/{id}
 ```
 
 **Response:**
+
 ```json
 {
   "id": 1,
@@ -168,6 +175,7 @@ GET /api/products/{id}
 ```
 
 #### Create Product
+
 ```http
 POST /api/products
 Content-Type: application/json
@@ -181,6 +189,7 @@ Content-Type: application/json
 ```
 
 #### Update Product
+
 ```http
 PUT /api/products/{id}
 Content-Type: application/json
@@ -194,6 +203,7 @@ Content-Type: application/json
 ```
 
 #### Delete Product
+
 ```http
 DELETE /api/products/{id}
 ```
@@ -248,6 +258,7 @@ curl -k -X DELETE "https://localhost:8443/api/products/1"
 ### Using Postman
 
 1. Import the following collection:
+
 ```json
 {
   "info": {
@@ -355,7 +366,7 @@ spring:
         backend: secret
         application-name: scopestack-rest
         default-context: application
-        profile-separator: '/'
+        profile-separator: "/"
 ```
 
 ### OpenBao Configuration
@@ -369,6 +380,7 @@ The application is configured to use OpenBao for secrets management:
 - **Fail-fast**: Disabled (for development)
 
 **Stored Secrets:**
+
 - Database credentials: `/secret/data/database`
 - Application secrets: `/secret/data/application`
 
@@ -384,14 +396,16 @@ The application is configured to use OpenBao for secrets management:
 ### Common Issues
 
 1. **Import Resolution Errors**
+
    ```bash
    # Rebuild common module
    ./mvnw clean install -pl scopestack-common
-   
+
    # Reload IDE/restart language server
    ```
 
 2. **Port Already in Use**
+
    ```bash
    # Change port in application.yml
    server:
@@ -405,6 +419,7 @@ The application is configured to use OpenBao for secrets management:
 ### Logs
 
 View application logs:
+
 ```bash
 # Maven
 ./mvnw spring-boot:run -pl scopestack-rest
@@ -412,6 +427,36 @@ View application logs:
 # Docker
 docker-compose logs scopestack-rest
 ```
+
+## OpenBao (Vault) Dev Mode Troubleshooting & Reset
+
+To ensure all developers get the same predictable root token and avoid permission errors:
+
+- The OpenBao dev root token is always: `scopestack-dev-token`
+- If you ever see a different token in the logs, or get permission errors:
+
+### Reset OpenBao to a Known State
+
+```bash
+docker compose down
+# Remove the OpenBao dev volume (if it exists)
+docker volume rm openbao_data || true
+# Start OpenBao again
+docker compose up -d openbao
+```
+
+- The root token will now be `scopestack-dev-token` (see `docker-compose.yml`).
+- Use this token for all UI and API access.
+
+### Common OpenBao Issues
+
+- **Random root token in logs:** Reset as above.
+- **Permission denied when writing secrets:** Reset as above and use the dev token.
+- **UI login fails:** Use the token `scopestack-dev-token` and leave the namespace blank or `/`.
+
+For more details, see the [OpenBao documentation](https://openbao.io/).
+
+---
 
 ## Contributing
 
