@@ -1,0 +1,39 @@
+# Docker Profile - PostgreSQL Database
+
+# PostgreSQL Database Configuration (Docker)
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scopestack
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  # JPA Configuration for PostgreSQL
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  
+  # Disable data.sql for now
+  sql:
+    init:
+      mode: never
+
+# Logging for Docker environment
+logging:
+  level:
+    com.scopestack: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{HH:mm:ss} - %msg%n"
+
+# Server configuration
+server:
+  port: 8080 

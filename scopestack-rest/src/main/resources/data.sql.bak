@@ -1,0 +1,48 @@
+-- Sample product data for ScopeStack Product Catalog API
+-- This data will be loaded when the application starts (if using create-drop)
+
+-- Electronics
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('iPhone 15 Pro', 'Latest iPhone with advanced camera system and A17 Pro chip', 999.99, 'Electronics', 'IPHONE-15-PRO', 50, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('MacBook Air M2', 'Lightweight laptop with M2 chip and all-day battery life', 1199.99, 'Electronics', 'MACBOOK-AIR-M2', 25, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Sony WH-1000XM5', 'Premium noise-cancelling wireless headphones', 349.99, 'Electronics', 'SONY-WH1000XM5', 30, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Samsung 4K Smart TV', '55-inch 4K Ultra HD Smart TV with HDR', 699.99, 'Electronics', 'SAMSUNG-4K-55', 15, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Clothing
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('Nike Air Max 270', 'Comfortable running shoes with Air Max technology', 129.99, 'Clothing', 'NIKE-AIRMAX-270', 100, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Levi''s 501 Jeans', 'Classic straight-fit denim jeans', 89.99, 'Clothing', 'LEVIS-501-32-32', 75, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Adidas T-Shirt', 'Moisture-wicking athletic t-shirt', 29.99, 'Clothing', 'ADIDAS-TSHIRT-M', 200, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('North Face Jacket', 'Waterproof hiking jacket with breathable membrane', 199.99, 'Clothing', 'NORTHFACE-JACKET', 40, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Books
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('The Pragmatic Programmer', 'Your journey to mastery in software development', 49.99, 'Books', 'BOOK-PRAGMATIC-PROG', 25, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Clean Code', 'A handbook of agile software craftsmanship', 44.99, 'Books', 'BOOK-CLEAN-CODE', 30, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Design Patterns', 'Elements of reusable object-oriented software', 54.99, 'Books', 'BOOK-DESIGN-PATTERNS', 20, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Effective Java', 'Programming language guide by Joshua Bloch', 39.99, 'Books', 'BOOK-EFFECTIVE-JAVA', 35, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Home & Garden
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('Philips Hue Starter Kit', 'Smart LED lighting system with bridge and bulbs', 199.99, 'Home & Garden', 'PHILIPS-HUE-STARTER', 20, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('KitchenAid Stand Mixer', 'Professional 5-quart stand mixer in red', 379.99, 'Home & Garden', 'KITCHENAID-MIXER', 10, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dyson V15 Detect', 'Cord-free vacuum with laser dust detection', 699.99, 'Home & Garden', 'DYSON-V15-DETECT', 15, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Weber Gas Grill', '3-burner gas grill with side tables', 449.99, 'Home & Garden', 'WEBER-GAS-GRILL', 8, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Sports & Outdoors
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('Peloton Bike+', 'Premium indoor cycling bike with rotating HD touchscreen', 2495.00, 'Sports & Outdoors', 'PELOTON-BIKE-PLUS', 5, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Yeti Tundra 45', 'Premium hard cooler with superior ice retention', 299.99, 'Sports & Outdoors', 'YETI-TUNDRA-45', 12, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Garmin Fenix 7', 'Premium multisport GPS watch with maps', 699.99, 'Sports & Outdoors', 'GARMIN-FENIX-7', 18, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Patagonia Down Jacket', 'Lightweight insulated jacket for cold weather', 229.99, 'Sports & Outdoors', 'PATAGONIA-DOWN-JACKET', 25, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Products with low stock (for testing low stock functionality)
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('Rare Collectible Item', 'Limited edition collectible with very low stock', 999.99, 'Other', 'RARE-COLLECTIBLE', 2, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Discontinued Product', 'Product being phased out', 29.99, 'Other', 'DISCONTINUED-ITEM', 1, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Seasonal Item', 'Limited seasonal product', 79.99, 'Other', 'SEASONAL-ITEM', 3, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Inactive products (for testing active/inactive functionality)
+INSERT INTO products (name, description, price, category, sku, stock_quantity, is_active, created_at, updated_at) VALUES
+('Old Model Phone', 'Previous generation smartphone', 299.99, 'Electronics', 'OLD-PHONE-MODEL', 0, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Outdated Software', 'Legacy software version', 19.99, 'Other', 'OUTDATED-SOFTWARE', 0, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

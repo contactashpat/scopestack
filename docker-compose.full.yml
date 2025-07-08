@@ -22,7 +22,32 @@ services:
       timeout: 5s
       retries: 5
 
-  # pgAdmin (Optional - Database Management UI)
+  # Spring Boot Application
+  app:
+    build:
+      context: .
+      dockerfile: scopestack-rest/Dockerfile
+    container_name: scopestack-app
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/scopestack
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - scopestack-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # pgAdmin (Database Management UI)
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: scopestack-pgadmin
@@ -59,4 +84,4 @@ volumes:
 
 networks:
   scopestack-network:
-    driver: bridge
+    driver: bridge 

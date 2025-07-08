@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: scopestack-product-api
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  
+  # Jackson Configuration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+# OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+  info:
+    title: ScopeStack Product Catalog API
+    description: REST API for managing product catalog
+    version: 1.0.0
+    contact:
+      name: ScopeStack Team
+      email: api@scopestack.com
+  servers:
+    - url: http://localhost:8080
+      description: Local development server
+
+# Logging Configuration
+logging:
+  level:
+    com.scopestack: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# Application-specific configuration
+app:
+  product:
+    default-page-size: 20
+    max-page-size: 100
+    low-stock-threshold: 10
