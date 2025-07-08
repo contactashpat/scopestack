@@ -1,45 +1,21 @@
-# Development Profile - H2 In-Memory Database
-
-# H2 Database Configuration
+---
+# Development Profile Configuration
 spring:
+  # Database Configuration for Development (PostgreSQL)
   datasource:
-    url: jdbc:h2:mem:scopestack;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
-  
-  # H2 Console (accessible at http://localhost:8080/h2-console)
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  
-  # JPA Configuration for H2
+    url: jdbc:postgresql://localhost:5432/scopestack
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
-    database-platform: org.hibernate.dialect.H2Dialect
-    defer-datasource-initialization: true
-  
-  # SQL Initialization
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data.sql
-  
-  # Vault Configuration (for development)
-  cloud:
-    vault:
-      host: localhost
-      port: 8200
-      scheme: http
-      token: dev-token
-      fail-fast: false  # Don't fail if Vault is not available
+        use_sql_comments: true
 
 # Logging for development
 logging:
@@ -49,16 +25,7 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
-    console: "%d{HH:mm:ss} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
-# Server configuration
-server:
-  port: 8443
-  ssl:
-    enabled: true
-    key-store: classpath:ssl/scopestack.p12
-    key-store-password: scopestack123
-    key-store-type: PKCS12
-    key-alias: scopestack
-  http2:
-    enabled: true 
+# Disable H2 console in dev (using PostgreSQL)
+spring.h2.console.enabled: false
