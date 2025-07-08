@@ -50,4 +50,6 @@ server:
     key-store: classpath:ssl/scopestack.p12
     key-store-password: scopestack123
     key-store-type: PKCS12
-    key-alias: scopestack 
+    key-alias: scopestack
+  http2:
+    enabled: true 
