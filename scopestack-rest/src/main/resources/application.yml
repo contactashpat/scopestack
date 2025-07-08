@@ -37,7 +37,7 @@ springdoc:
       name: ScopeStack Team
       email: api@scopestack.com
   servers:
-    - url: http://localhost:8080
+    - url: https://localhost:8443
       description: Local development server
 
 # Logging Configuration
