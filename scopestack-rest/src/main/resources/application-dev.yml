@@ -31,6 +31,15 @@ spring:
     init:
       mode: always
       data-locations: classpath:data.sql
+  
+  # Vault Configuration (for development)
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      token: dev-token
+      fail-fast: false  # Don't fail if Vault is not available
 
 # Logging for development
 logging:
