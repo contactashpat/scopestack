@@ -2,6 +2,18 @@
 
 A Spring Boot application with a multi-module Maven structure for managing products with RESTful APIs.
 
+## Features
+
+- **RESTful API** with full CRUD operations
+- **Multi-module Maven project** structure
+- **Spring Boot 3.2.0** with Spring Data JPA
+- **HTTPS/SSL/TLS encryption** with self-signed certificate
+- **HTTP/2 protocol support** for improved performance
+- **H2 in-memory database** with sample data
+- **Pagination support** for large datasets
+- **Docker support** with docker-compose
+- **Swagger/OpenAPI documentation**
+
 ## Project Structure
 
 ```
@@ -154,6 +166,18 @@ DELETE /api/products/{id}
 ```
 
 ## Testing the API
+
+### Browser Testing (HTTP/2)
+
+You can test the API directly in your browser:
+
+1. **Open**: `https://localhost:8443/api/products`
+2. **Accept the security warning** (self-signed certificate)
+3. **Check HTTP/2 in DevTools**:
+   - Open DevTools (F12)
+   - Go to Network tab
+   - Reload the page
+   - Look for "Protocol" column showing "h2" (HTTP/2)
 
 ### Using cURL
 
