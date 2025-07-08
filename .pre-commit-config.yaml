@@ -7,7 +7,7 @@ repos:
 
   # Markdown formatting
   - repo: https://github.com/DavidAnson/markdownlint
-    rev: v0.39.0
+    rev: v0.39.1
     hooks:
       - id: markdownlint
 

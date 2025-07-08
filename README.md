@@ -12,6 +12,7 @@ A Spring Boot application with a multi-module Maven structure for managing produ
 - **H2 in-memory database** with sample data
 - **Pagination support** for large datasets
 - **Docker support** with docker-compose
+- **OpenBao (Vault) integration** for secrets management
 - **Swagger/OpenAPI documentation**
 
 ## Project Structure
@@ -78,6 +79,38 @@ docker compose up --build
 # Or run individual services
 docker compose up scopestack-rest
 ```
+
+### 4. Secrets Management with OpenBao
+
+The project includes OpenBao (a HashiCorp Vault alternative) for secrets management using Docker:
+
+```bash
+# Start OpenBao
+./setup-openbao.sh start
+
+# Initialize secrets
+./setup-openbao.sh init
+
+# Check status
+./setup-openbao.sh status
+
+# Stop OpenBao
+./setup-openbao.sh stop
+```
+
+**OpenBao Access:**
+- **URL**: http://localhost:8200
+- **UI**: http://localhost:8200/ui
+- **Root Token**: `scopestack-dev-token`
+
+**Available Commands:**
+- `./setup-openbao.sh start` - Start OpenBao container
+- `./setup-openbao.sh stop` - Stop OpenBao container
+- `./setup-openbao.sh restart` - Restart OpenBao container
+- `./setup-openbao.sh status` - Check OpenBao status
+- `./setup-openbao.sh init` - Initialize secrets
+- `./setup-openbao.sh logs` - View OpenBao logs
+- `./setup-openbao.sh help` - Show help
 
 ## API Documentation
 
@@ -309,7 +342,35 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      authentication: TOKEN
+      token: scopestack-dev-token
+      fail-fast: false
+      kv:
+        enabled: true
+        backend: secret
+        application-name: scopestack-rest
+        default-context: application
+        profile-separator: '/'
 ```
+
+### OpenBao Configuration
+
+The application is configured to use OpenBao for secrets management:
+
+- **Host**: localhost:8200 (Docker container)
+- **Authentication**: Token-based
+- **Secrets Engine**: Key-Value (version 2)
+- **Backend**: `secret`
+- **Fail-fast**: Disabled (for development)
+
+**Stored Secrets:**
+- Database credentials: `/secret/data/database`
+- Application secrets: `/secret/data/application`
 
 ### Environment Variables
 

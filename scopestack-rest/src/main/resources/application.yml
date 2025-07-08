@@ -56,3 +56,19 @@ app:
     default-page-size: 20
     max-page-size: 100
     low-stock-threshold: 10
+
+# OpenBao (Vault) Configuration for Docker
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      authentication: TOKEN
+      token: scopestack-dev-token
+      fail-fast: false
+      kv:
+        enabled: true
+        backend: secret
+        application-name: scopestack-rest
+        default-context: application
+        profile-separator: '/'
